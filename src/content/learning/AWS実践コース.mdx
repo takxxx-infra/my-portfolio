@@ -1,0 +1,58 @@
+---
+title: "マルチアカウント構成"
+type: "learning"
+period: "2025.07 - 2025.09"
+summary: ""
+tech:
+  - AWS
+  - Terraform
+techTable:
+  - label: "プラットフォーム"
+    values:
+      - "AWS"
+  - label: "AWSサービス"
+    values:
+      - AWS Organizations
+      - IAM Identity Center
+      - IAM Role
+      - IAM Policy
+      - Route53
+      - VPC
+      - Subnet
+      - Route Table
+      - Internet Gateway
+      - NAT Gateway
+      - Security Group
+      - ALB
+      - S3
+      - EC2
+      - ECS
+      - ECR
+      - RDS
+      - Session Manager
+      - Secrets Manager
+      - Certificate Manager
+      - CloudWatch Logs
+      - CloudFront
+      - Amplify
+      - SES
+      - SQS
+      - EventBridge Scheduler
+  - label: "IaC"
+    values:
+      - "Terraform"
+outcome: |
+  ・NATインスタンスを使用したコスト削減
+  ・EventBridge SchedulerにてEC2・RDSインスタンスの停止忘れ防止
+diagram: "/images/diagrams/cp_jissen.png"
+order: 300
+---
+
+## 学習目的
+- L7 攻撃対策を Terraform でテンプレ化し、複数案件へ再利用できる形に落とし込む。
+- ログ可視化基盤を整備し、攻撃検知のリードタイムを短縮する。
+
+## 学んだこと
+- AWS Managed Rules と Bot Control の組み合わせ最適化。
+- CloudFront + WAF + S3 オリジン構成でのログを Athena で分析し、QuickSight へ可視化するパイプライン。
+- Terraform で WAF 設定をモジュール化する際のベストプラクティス。

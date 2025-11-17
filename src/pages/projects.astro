@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import FooterNav from "../components/common/FooterNav.astro";
+import ProjectsSection from "../components/sections/ProjectsSection.astro";
+
+const projects = (await getCollection("projects"))
+	.map((entry) => ({ ...entry.data, slug: entry.slug }))
+	.sort((a, b) => (a.order ?? 100) - (b.order ?? 100));
+---
+
+<Layout title="実務実績 | Takahiro Portfolio">
+	<section class="relative isolate overflow-hidden bg-[#f5fbf3]">
+		<div class="h-[50vh] w-full">
+			<img src="/images/theme/project.png" alt="山と湖のイメージ" class="h-full w-full object-cover" loading="lazy" />
+			<div class="absolute inset-0 bg-gradient-to-b from-white/30 to-[#f5fbf3]"></div>
+			<div class="absolute inset-0 flex items-center justify-center px-6 text-center">
+				<div class="space-y-2 pt-24 text-[#21425d]">
+					<p class="text-sm tracking-[0.4em] uppercase">Experience</p>
+					<h1 class="text-4xl font-black">これまでの実務経験</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="mx-auto w-full max-w-5xl px-4 text-[#2e4666] sm:px-6">
+		<ProjectsSection projects={projects} />
+	</div>
+	<FooterNav />
+</Layout>

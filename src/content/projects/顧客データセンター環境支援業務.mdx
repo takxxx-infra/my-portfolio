@@ -1,0 +1,85 @@
+---
+title: "顧客データセンター環境支援業務"
+type: "project"
+period: "2024.01 - 2025.06"
+role: "Infrastructure Engineer / SRE"
+summary: | 
+  顧客データセンター環境で複数案件を担当し、ロードバランサや仮想化基盤、メール基盤、監視環境などを設計・構築。
+  障害発生から一時運用自動化まで一連の実装を担当。
+tech:
+  - AWS
+  - Proxmox VE
+  - Citrix ADC
+  - Rocky Linux
+  - Python
+  - Bash
+  - Zabbix
+  - Automation
+phases:
+  - 要件整理
+  - 基本設計
+  - 詳細設計
+  - 構築
+  - 検証
+  - 運用保守
+techTable:
+  - label: "OS/HyperVisor"
+    values:
+      - "RHEL 9.2"
+      - "CentOS 7.5"
+      - "Rocky Linux 9.2"
+      - "KVM"
+      - "Proxmox VE 8.4"
+      - "Hyper-V"
+      - "Windows Server 2016"
+      - "Windows Server 2019"
+      - "Citrix Netscaler 12.1/13.1"
+  - label: "MW"
+    values:
+      - "Postfix"
+      - "Dovecot"
+      - "Postfix Admin"
+      - "Apache"
+      - "Symantec Endpoint Protection"
+  - label: "クラウド"
+    values:
+      - "Amazon SES"
+      - "AWS Lambda"
+      - "S3"
+  - label: "言語・ツール"
+    values:
+      - "Python"
+      - "Bash"
+      - "PowerShell"
+  - label: "モニタリング"
+    values:
+      - "Zabbix"
+outcome: |
+  ・障害発生を検知し、自動復旧を行うための一時運用自動化を実装
+  ・Zabbix API を活用した自動化で移行工数を 25h → 2h に短縮し、200台超の監視対象の無停止移行をリード
+  ・SPF/DKIM/DMARC/ARCを実装したメールサーバの設計構築、本番環境の移行をリード
+order: 300
+---
+
+## プロジェクト概要
+- 顧客プライベートクラウドの更改案件を横断し、Citrix Netscaler のバージョンアップ、余剰サーバの仮想化再活用、メール通知基盤刷新、Zabbix 監視最適化を担当。
+- プロジェクトマネージャーと並走し、要件整理〜設計〜構築〜運用手順化までを 1 名で回すタスクと、3〜6 名チームのテクニカルリードを兼務。
+
+## 主な取り組み
+1. **ロードバランサ移行**  
+   - 旧構成の不要設定を洗い出し、命名規則や成果物格納ルールを再定義。  
+   - Netscaler 12.1→13.1 への移行計画、要件整理、タスク分解、メンバーへの配賦を実施。
+2. **仮想化基盤構築**  
+   - 余剰サーバで Proxmox VE を採用し、用途別の仮想ネットワーク/運用ルールを設計。  
+   - ポートフォワーディング簡略化スクリプトや運用マニュアルを整備し、検証〜本番を短期間で完了。
+3. **メール通知基盤刷新**  
+   - Rocky Linux + Postfix/Dovecot をベースに TLS/SASL/DMARC を実装し、暗号化と認証を強化。  
+   - AWS SES 連携や Bash/Python での構築スクリプトを作成し、3 カ月で設計〜リリース。
+4. **監視・自動化**  
+   - Zabbix API を活用し、移行作業を 25 時間 → 2 時間に短縮。  
+   - Symantec Endpoint Protection、Zabbix Agent 約 200 台のバージョンアップを自動化。  
+   - 運用監視ではアラート削減と通知制御、障害復旧スクリプトを継続的に改善。
+
+## 成果
+- ロードバランサ/仮想化/メール/監視の各サブプロジェクトを重複期間で完遂。  
+- 自動化により人的工数を大幅削減、監視体制の UX を高め、顧客のプライベートクラウド運用品質を底上げした。

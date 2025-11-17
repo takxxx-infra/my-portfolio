@@ -1,0 +1,33 @@
+---
+type Badge = {
+	name: string;
+	provider: string;
+	issuedOn: string;
+	credentialId?: string;
+	image: string;
+};
+
+const { badges } = Astro.props as { badges: Badge[] };
+---
+
+<section id="badges" class="w-full py-12">
+	<header class="space-y-2 text-center md:text-left">
+		<p class="text-xs font-semibold uppercase tracking-[0.4em] text-[#7c94b1]">Certifications</p>
+		<h2 class="text-3xl font-black text-[#2e4666]">資格バッジ</h2>
+	</header>
+	<div class="mt-8 flex flex-col gap-6">
+		{badges.map((badge) => (
+			<div class="flex flex-wrap items-center gap-4 border-b border-[#dbe5f1] pb-4 last:border-0">
+				<img src={badge.image} alt={badge.name} class="h-40 w-40 object-contain transition duration-200 hover:-translate-y-2" />
+				<div>
+					<p class="text-lg font-semibold text-[#2e4666]">{badge.name}</p>
+					<p class="text-sm text-[#5f7693]">{badge.provider}</p>
+				</div>
+				<div class="ml-auto text-right">
+					<p class="text-sm font-semibold text-[#397bc2]">{badge.issuedOn}</p>
+					{badge.credentialId && <p class="text-xs text-[#8ea6c1]">ID: {badge.credentialId}</p>}
+				</div>
+			</div>
+		))}
+	</div>
+</section>

@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+	font-family: "Noto Sans JP", "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	color: #2f4666;
+	background-color: #f7fbff;
+}
+
+body {
+	min-height: 100vh;
+	background-color: #f7fbff;
+	color: #2f4666;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+@layer utilities {
+	.sticky-nav-scrolled[data-top-nav] {
+		background-color: rgba(255, 255, 255, 0.95);
+		border-color: rgba(226, 232, 240, 0.8);
+	}
+}

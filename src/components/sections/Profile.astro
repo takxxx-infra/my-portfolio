@@ -1,0 +1,48 @@
+---
+const techStack = ["AWS", "Terraform", "Linux", "GitHub", "NewRelic", "Zabbix", "Python", "Bash", "Powershell", "Slack", "Teams", "Backlog"  ];
+---
+
+<section id="about" class="w-full py-12 text-[#2e4666]">
+	<p class="text-xs font-semibold uppercase tracking-[0.4em] text-[#7c94b1]">Profile</p>
+	<h2 class="text-3xl font-black">自己紹介</h2>
+	<div class="mt-6 flex flex-col gap-6 md:flex-row md:items-start">
+		<div class="flex flex-col items-center gap-3 text-center md:w-1/4">
+			<div class="flex h-32 w-32 overflow-hidden rounded-full bg-[#e7f0fb]">
+				<img src="/images/profile-avatar.png" alt="Takahiro Avatar" class="h-full w-full object-cover" loading="lazy" />
+			</div>
+			<p class="text-sm font-semibold text-[#5f7693]">クラウドエンジニア Takahiro</p>
+			<div class="flex gap-4 text-[#4b6a90]">
+				<a href="https://github.com/takxxx-infra" aria-label="GitHub" target="_blank" rel="noreferrer">
+					<img src="/images/icon/github-mark.png" alt="GitHub" class="h-10 w-10" loading="lazy" />
+				</a>
+				<a href="https://x.com/k_it_vx" aria-label="X" target="_blank" rel="noreferrer">
+					<img src="/images/icon/x-logo.png" alt="X" class="h-10 w-10" loading="lazy" />
+				</a>
+			</div>
+		</div>
+		<div class="space-y-6 md:flex-1">
+			<div class="space-y-3 border-b border-[#d5e1f1] pb-4">
+				<h3 class="text-lg font-semibold text-[#3a5f88]">概要</h3>
+				<p class="leading-relaxed text-[#4f6d91]">
+					学生時代は音楽活動に没頭し、そのまま大学卒業後は音楽業界へ。<br>
+					大手音楽スタジオでは店長として店舗運営からスタッフ採用、イベント企画まで幅広く担当し、現場で培った調整力や問題解決力が今の基礎になっている。<br><br>
+
+					2023年頃からIT業界へキャリアをシフト。<br>
+					プライベートクラウド環境の基本設計〜構築・保守までを一貫して担当し、監視設計や障害一次対応の自動化など、SRE寄りのタスクを経験。<br><br>
+
+					現在は、AWSプレミアティアサービスパートナー企業の設計・構築チームに参画し、日々AWS環境のアーキテクチャ設計から構築までを担当。
+				</p>
+			</div>
+			<div class="space-y-3">
+				<h3 class="text-lg font-semibold text-[#3a5f88]">技術スタック</h3>
+				<div class="flex flex-wrap gap-3">
+					{techStack.map((tech) => (
+						<span class="rounded-full border border-[#9eb4d3] bg-white/80 px-4 py-1 text-sm font-semibold text-[#2e4666] shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-[#397bc2] hover:bg-[#e0edff] hover:text-[#1f3a5c]">
+							{tech}
+						</span>
+					))}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

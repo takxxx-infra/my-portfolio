@@ -1,0 +1,88 @@
+---
+import { getCollection } from "astro:content";
+import Hero from "../components/sections/Hero.astro";
+import Profile from "../components/sections/Profile.astro";
+import ProjectsSection from "../components/sections/ProjectsSection.astro";
+import LearningSection from "../components/sections/LearningSection.astro";
+import ShutterOverlay from "../components/common/ShutterOverlay.astro";
+import BadgeSection from "../components/sections/BadgeSection.astro";
+import FooterNav from "../components/common/FooterNav.astro";
+import Layout from "../layouts/Layout.astro";
+
+const projects = (await getCollection("projects"))
+	.map((entry) => ({
+		...entry.data,
+		slug: entry.slug,
+	}))
+	.sort((a, b) => (a.order ?? 100) - (b.order ?? 100));
+
+const learnings = (await getCollection("learning"))
+	.map((entry) => ({
+		...entry.data,
+		slug: entry.slug,
+	}))
+	.sort((a, b) => (a.order ?? 100) - (b.order ?? 100));
+
+const latestProjects = projects.slice(0, 2);
+const latestLearnings = learnings.slice(0, 2);
+
+const badges = [
+	{
+		name: "AWS Certified Solutions Architect – Associate",
+		provider: "Amazon Web Services",
+		issuedOn: "2023-08",
+		credentialId: "SAA-C03",
+		image: "/badges/aws-saa.png",
+	},
+	{
+		name: "AWS Certified Solutions Architect – Professional",
+		provider: "Amazon Web Services",
+		issuedOn: "2025-03",
+		credentialId: "SAP-C03",
+		image: "/badges/aws-sap.png",
+	},
+	{
+		name: "LPIC-1 Certification",
+		provider: "LPI",
+		issuedOn: "2023-07",
+		credentialId: "LPIC-1",
+		image: "/badges/lpic-1.png",
+	},
+	{
+		name: "LPIC-2 Certification",
+		provider: "LPI",
+		issuedOn: "2023-10",
+		credentialId: "LPIC-2",
+		image: "/badges/lpic-2.png",
+	},
+	{
+		name: "LPIC-3 Virtualization and Containerization Certification",
+		provider: "LPI",
+		issuedOn: "2023-11",
+		credentialId: "LPIC-305",
+		image: "/badges/lpic-3.png",
+	},
+	{
+		name: "Cisco - CCNA",
+		provider: "Cisco",
+		issuedOn: "2022-11",
+		credentialId: "CCNA",
+		image: "/badges/ccna.png",
+	},
+];
+---
+
+	<Layout title="TakahiroのPortfolio">
+		<ShutterOverlay />
+		<Hero />
+		<main class="relative mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 pb-12 pt-8 sm:px-6">
+			<Profile />
+			<section class="space-y-4 text-[#2e4666]">
+			<ProjectsSection projects={latestProjects} viewMoreLink="/projects" />
+			<section class="space-y-4 text-[#2e4666]">
+			<LearningSection learnings={latestLearnings} viewMoreLink="/learning" />
+			</section>
+			<BadgeSection badges={badges} />
+		</main>
+		<FooterNav />
+	</Layout>

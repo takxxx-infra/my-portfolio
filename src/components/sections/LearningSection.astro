@@ -1,0 +1,90 @@
+---
+type LearningItem = {
+	title: string;
+	period: string;
+	summary: string;
+	outcome: string;
+	tech: string[];
+	techTable?: { label: string; values: string[] }[];
+	github?: string | boolean;
+	diagram?: string;
+};
+
+const { learnings, viewMoreLink } = Astro.props as {
+	learnings: LearningItem[];
+	viewMoreLink?: string;
+};
+
+const DEFAULT_GITHUB_PROFILE = "https://github.com/takxxx-infra";
+---
+
+<section id="learning" class="w-full py-12">
+	<header class="space-y-2 text-center md:text-left">
+		<p class="text-xs font-semibold uppercase tracking-[0.4em] text-[#7c94b1]">Learning</p>
+		<h2 class="text-3xl font-black text-[#2e4666]">学習記録</h2>
+	</header>
+	<div class="mt-8 space-y-10">
+		{learnings.map((item) => (
+			<article class="border-b border-[#dbe5f1] pb-12 last:border-0 last:pb-0">
+				<div class="grid gap-6 md:grid-cols-2 md:gap-10">
+					<div class="space-y-3 text-[#2e4666]">
+						<p class="text-xs font-semibold uppercase tracking-[0.3em] text-[#879cb7]">{item.period}</p>
+						<h3 class="text-2xl font-bold">{item.title}</h3>
+						<p class="whitespace-pre-line text-base leading-relaxed text-[#4f6d91]">{item.summary}</p>
+						<p class="whitespace-pre-line text-sm font-semibold text-[#397bc2]">{item.outcome}</p>
+						{(() => {
+							const githubLink =
+								typeof item.github === "string"
+									? item.github
+									: item.github
+										? DEFAULT_GITHUB_PROFILE
+										: undefined;
+							return (
+								githubLink && (
+									<a
+										class="inline-flex items-center gap-1 rounded-full bg-[#397bc2] px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5"
+										href={githubLink}
+										target="_blank"
+										rel="noreferrer"
+										style={{ color: '#fff' }}
+									>
+										View GitHub
+									</a>
+								)
+							);
+						})()}
+					</div>
+						<table class="h-fit w-full border border-[#dbe5f1] text-left text-sm text-[#2e4666]">
+							<tbody>
+								{(item.techTable ?? [{ label: "使用技術", values: item.tech }]).map((row) => (
+									<tr class="border-b border-[#dbe5f1] last:border-0">
+										<th class="w-32 bg-[#f5f8fc] px-4 py-3 font-semibold">{row.label}</th>
+										<td class="px-4 py-3">{row.values.join(", ")}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				<div class="mt-6 flex h-full w-full items-center justify-center rounded-2xl bg-[#edf3fb] p-4">
+					{item.diagram ? (
+						<img src={item.diagram} alt={`${item.title} 構成図`} class="h-200 w-200 object-contain" loading="lazy" />
+					) : (
+						<p class="text-sm text-[#8ea6c1]">構成図を準備中です</p>
+					)}
+				</div>
+			</article>
+		))}
+	</div>
+
+	{viewMoreLink && (
+		<div class="mt-10 text-center">
+			<a
+				class="inline-flex items-center rounded-full bg-[#397bc2] px-8 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5"
+				href={viewMoreLink}
+				style={{ color: '#fff' }}
+			>
+				View More
+			</a>
+		</div>
+	)}
+</section>

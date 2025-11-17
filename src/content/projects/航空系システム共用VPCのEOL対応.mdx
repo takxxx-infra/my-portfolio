@@ -1,0 +1,50 @@
+---
+title: "航空系システム共用VPCのEOL対応"
+type: "project"
+period: "2025.08 - 現在"
+role: "Infrastructure Engineer"
+summary: |
+  AWS環境上のEOL対応に伴い、シングルAZ構成の開発環境をマルチAZ化構成に変更。
+  Lmabda、Syslogサーバなどリプレイスを実施。
+  本番環境の移行作業が完了後、開発環境はシングルAZ構成に戻すため、追加したリソース群をTerraformにてIaC化。
+tech:
+  - AWS
+  - Terraform
+phases:
+  - 詳細設計
+  - 構築
+  - テスト
+techTable:
+  - label: "プラットフォーム"
+    values:
+      - "AWS"
+  - label: "AWSサービス"
+    values:
+      - "VPC"
+      - "EC2"
+      - "Lambda"
+      - "IAM"
+      - "Transit Gateway"
+  - label: "OS"
+    values:
+      - "Amazon Linux 2/2023"
+  - label: "言語"
+    values:
+      - "Python 3.9/3.12"
+  - label: "IaC"
+    values:
+      - "Terraform"
+outcome: |
+  ・TerraformにてIaC化することで、シングルAZ構成への戻しに伴う工数を削減
+order: 290
+---
+
+## プロジェクト概要
+- プロジェクトの背景や目的を箇条書きで。
+
+## 主な取り組み
+1. **タスク1**  
+   - 詳細
+
+## 成果
+- まとめ

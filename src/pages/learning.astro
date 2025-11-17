@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import FooterNav from "../components/common/FooterNav.astro";
+import LearningSection from "../components/sections/LearningSection.astro";
+
+const learnings = (await getCollection("learning"))
+	.map((entry) => ({ ...entry.data, slug: entry.slug }))
+	.sort((a, b) => (a.order ?? 100) - (b.order ?? 100));
+---
+
+<Layout title="Learning | Takahiro Portfolio">
+	<section class="relative isolate overflow-hidden bg-[#f5fbf3]">
+		<div class="h-[50vh] w-full">
+			<img src="/images/theme/lerning_record.png" alt="山と湖のイメージ" class="h-full w-full object-cover" loading="lazy" />
+			<div class="absolute inset-0 bg-gradient-to-b from-white/30 to-[#f5fbf3]/90"></div>
+			<div class="absolute inset-0 flex items-center justify-center px-6 text-center">
+				<div class="space-y-2 pt-24 text-[#21425d]">
+					<p class="text-sm tracking-[0.4em] uppercase">Learning</p>
+					<h1 class="text-4xl font-black">学習記録</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="mx-auto w-full max-w-5xl px-4 text-[#2e4666] sm:px-6">
+		<LearningSection learnings={learnings} />
+	</div>
+	<FooterNav />
+</Layout>

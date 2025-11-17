@@ -1,0 +1,64 @@
+<div id="opening-shutter" class="shutter">
+	<div class="shutter-line"></div>
+</div>
+
+<style>
+	@keyframes byeShutter {
+		70% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+			visibility: hidden;
+			z-index: -1;
+		}
+	}
+
+	@keyframes shutterOpen {
+		0% {
+			width: 0;
+			height: 1px;
+		}
+		50% {
+			width: 100%;
+			height: 1px;
+		}
+		90% {
+			width: 100%;
+			height: 100%;
+		}
+		100% {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.shutter {
+		position: fixed;
+		inset: 0;
+		background-color: #1e1e1e;
+		z-index: 9999;
+		animation: byeShutter 1.2s forwards;
+	}
+
+	.shutter-line {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		margin: auto;
+		background-color: #f3f3f3;
+		width: 0;
+		height: 1px;
+		animation: shutterOpen 1.2s forwards;
+	}
+</style>
+
+<script>
+	const overlay = document.getElementById("opening-shutter");
+	overlay?.addEventListener("animationend", (event) => {
+		if (event.animationName === "byeShutter") {
+			overlay.remove();
+		}
+	});
+</script>
