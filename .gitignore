@@ -23,8 +23,8 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# # sample
-# sample/
+# sample
+sample/
 
 # optional tool caches / hosts
 .vercel/
