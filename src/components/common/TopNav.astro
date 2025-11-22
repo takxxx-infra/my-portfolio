@@ -1,12 +1,99 @@
+---
+const navLinks = [
+	{ href: "/", label: "トップ" },
+	{ href: "/projects", label: "これまでの実務経験" },
+	{ href: "/learning", label: "学習記録" }
+];
+---
+
 <header class="fixed inset-x-0 top-0 z-50 border-b border-white/30 bg-white/30 py-4 text-sm text-[#2e4666] backdrop-blur transition-colors duration-300" data-top-nav>
 	<div class="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-		<a href="/" class="text-xs font-semibold tracking-[0.2em] uppercase text-[#2e4666] drop-shadow">
-			Takahiro&apos;s Portfolio
-		</a>
-		<nav class="flex flex-col items-end gap-4 text-sm font-semibold text-[#2e4666] sm:flex-row sm:items-center sm:gap-6">
-			<a href="/" class="transition hover:text-[#1a3f66]">トップ</a>
-			<a href="/projects" class="transition hover:text-[#1a3f66]">これまでの実務経験</a>
-			<a href="/learning" class="transition hover:text-[#1a3f66]">学習記録</a>
+		<div class="flex items-center justify-between gap-3">
+			<a href="/" class="text-xs font-semibold uppercase tracking-[0.2em] text-[#2e4666] drop-shadow">
+				Takahiro&apos;s Portfolio
+			</a>
+			<button
+				class="rounded border border-[#2e4666]/30 p-2 text-[#2e4666] transition hover:border-[#2e4666] hover:bg-white sm:hidden"
+				type="button"
+				aria-expanded="false"
+				aria-controls="top-nav-menu"
+				data-nav-toggle
+			>
+				<span class="sr-only">メニューを開閉</span>
+				<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="4" x2="20" y1="6" y2="6" />
+					<line x1="4" x2="20" y1="12" y2="12" />
+					<line x1="4" x2="20" y1="18" y2="18" />
+				</svg>
+			</button>
+		</div>
+		<nav class="hidden flex-col items-end gap-4 text-sm font-semibold text-[#2e4666] sm:flex sm:flex-row sm:items-center sm:gap-6" data-nav-desktop>
+			{navLinks.map((link) => (
+				<a href={link.href} class="transition hover:text-[#1a3f66]">
+					{link.label}
+				</a>
+			))}
 		</nav>
 	</div>
 </header>
+<div class="sm:hidden" data-nav-mobile>
+	<div class="pointer-events-none fixed inset-0 z-40 bg-[#0f172a]/40 opacity-0 transition-opacity duration-300" aria-hidden="true" data-nav-overlay></div>
+	<nav
+		id="top-nav-menu"
+		class="fixed inset-y-0 right-0 z-50 flex w-64 translate-x-full flex-col gap-6 bg-white/95 px-6 py-16 text-base font-semibold text-[#2e4666] shadow-xl transition-transform duration-300"
+		data-nav-drawer
+	>
+		<button class="ml-auto text-sm font-medium text-[#5a6f86] underline-offset-2 hover:underline" type="button" data-nav-close>
+			閉じる
+		</button>
+		{navLinks.map((link) => (
+			<a href={link.href} class="transition hover:text-[#1a3f66]" data-nav-close>
+				{link.label}
+			</a>
+		))}
+	</nav>
+</div>
+<script type="module">
+	const drawer = document.querySelector("[data-nav-drawer]");
+	const overlay = document.querySelector("[data-nav-overlay]");
+	const toggle = document.querySelector("[data-nav-toggle]");
+	const closeTriggers = document.querySelectorAll("[data-nav-close]");
+
+	if (drawer && overlay && toggle) {
+		const openDrawer = () => {
+			drawer.classList.remove("translate-x-full");
+			overlay.classList.remove("pointer-events-none", "opacity-0");
+			overlay.classList.add("pointer-events-auto", "opacity-100");
+			toggle.setAttribute("aria-expanded", "true");
+			document.body.style.overflow = "hidden";
+		};
+
+		const closeDrawer = () => {
+			drawer.classList.add("translate-x-full");
+			overlay.classList.add("pointer-events-none", "opacity-0");
+			overlay.classList.remove("pointer-events-auto", "opacity-100");
+			toggle.setAttribute("aria-expanded", "false");
+			document.body.style.overflow = "";
+		};
+
+		toggle.addEventListener("click", () => {
+			const isOpen = toggle.getAttribute("aria-expanded") === "true";
+			if (isOpen) {
+				closeDrawer();
+			} else {
+				openDrawer();
+			}
+		});
+
+		overlay.addEventListener("click", closeDrawer);
+		closeTriggers.forEach((trigger) => {
+			trigger.addEventListener("click", closeDrawer);
+		});
+
+		window.addEventListener("resize", () => {
+			if (window.innerWidth >= 640) {
+				closeDrawer();
+			}
+		});
+	}
+</script>
