@@ -28,7 +28,7 @@ export function TopNav(): JSX.Element {
     >
       <div className="mx-auto flex max-w-6xl items-center gap-5 px-6 py-3.5">
         <Link href="/" className="text-sm font-semibold tracking-[0.14em] text-[var(--text-primary)]">
-          TAKAHIRO's Portfolio
+          TAKAHIRO&apos;s Portfolio
         </Link>
 
         <nav className="ml-auto hidden items-center gap-6 md:flex">
