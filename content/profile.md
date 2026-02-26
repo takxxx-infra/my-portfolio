@@ -25,10 +25,10 @@ skills:
   - Proxmox
 links:
   - label: "GitHub"
-    url: "https://github.com/"
+    url: "https://github.com/takxxx-infra"
     icon: "github"
   - label: "X"
-    url: "https://x.com/"
+    url: "https://x.com/k_it_vx"
     icon: "x"
 ---
 
