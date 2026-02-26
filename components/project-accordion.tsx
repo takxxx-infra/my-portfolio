@@ -10,7 +10,7 @@ type ProjectAccordionProps = {
   initialOpenSlug?: string;
 };
 
-const PRIORITY_LABELS = ["プラットフォーム", "クラウド", "AWSサービス", "IaC", "OS", "言語"];
+const PRIORITY_LABELS = ["プラットフォーム", "OS", "OS/HyperVisor", "IaC"];
 
 function getRepresentativeStacks(project: Project): string[] {
   const selected: string[] = [];
