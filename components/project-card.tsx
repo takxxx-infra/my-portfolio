@@ -37,13 +37,6 @@ export function ProjectCard({ project, detailed = false }: ProjectCardProps): JS
 
         <ul className="list-disc space-y-1 pl-5 text-sm text-[var(--text-1)]">{renderBullets(project.outcome)}</ul>
 
-        <div className="flex flex-wrap gap-2">
-          {project.impactMetrics.map((metric) => (
-            <span key={`${project.slug}-${metric}`} className="rounded-full border border-[var(--line-neon)] bg-[rgba(255,255,255,0.08)] px-3 py-1 text-xs text-[var(--text-secondary)]">
-              {metric}
-            </span>
-          ))}
-        </div>
       </div>
 
       <div className="space-y-4">

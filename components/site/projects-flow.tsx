@@ -138,7 +138,7 @@ function toStackBadge(project: Project): StackBadge {
     return {
       key: "aws",
       label: hasAws,
-      iconSrc: "/images/icon/aws-color.svg",
+      iconSrc: "/images/icon/aws-icon.png",
       text: "AWS",
       isAws: true
     };
@@ -207,7 +207,7 @@ function FlowProjectCard({ project }: { project: Project }): JSX.Element {
     <Link
       href={`/projects?slug=${encodeURIComponent(project.slug)}`}
       aria-label={`${project.title} の詳細へ`}
-      className="projects-flow-card site-surface-soft group relative block w-[320px] shrink-0 rounded-xl p-4 transition duration-200 hover:-translate-y-1 hover:scale-[1.01] hover:border-[var(--line-neon)] hover:shadow-[var(--glow-cyan)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--line-neon)]"
+      className="projects-flow-card site-surface-soft group relative block w-full max-w-[320px] shrink-0 rounded-xl p-4 transition duration-200 hover:-translate-y-1 hover:scale-[1.01] hover:border-[var(--line-neon)] hover:shadow-[var(--glow-cyan)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--line-neon)] md:w-[320px] md:max-w-none"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
@@ -216,13 +216,23 @@ function FlowProjectCard({ project }: { project: Project }): JSX.Element {
         </div>
         <span
           title={badge.label}
-          className={`inline-flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border text-[11px] font-semibold ${
+          className={`inline-flex h-14 w-14 shrink-0 items-center justify-center border text-[11px] font-semibold ${
             badge.isAws
-              ? "border-[#3f4d62] bg-[#232f3e]"
-              : "border-[var(--line-strong)] bg-[rgba(28,28,28,0.95)] text-[var(--text-primary)]"
+              ? "overflow-hidden rounded-full border-[rgba(255,255,255,0.24)] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.28)]"
+              : "overflow-hidden rounded-full border-[var(--line-strong)] bg-[rgba(28,28,28,0.95)] text-[var(--text-primary)]"
           }`}
         >
-          {badge.iconSrc ? <Image src={badge.iconSrc} alt={`${badge.label} icon`} width={40} height={40} className="h-10 w-10 object-contain" /> : badge.text}
+          {badge.iconSrc ? (
+            <Image
+              src={badge.iconSrc}
+              alt={`${badge.label} icon`}
+              width={40}
+              height={40}
+              className={badge.isAws ? "h-9 w-9 object-contain" : "h-10 w-10 object-contain"}
+            />
+          ) : (
+            badge.text
+          )}
         </span>
       </div>
       <p className="mt-2 line-clamp-3 text-sm text-[var(--text-secondary)]">{project.summary}</p>
@@ -236,7 +246,7 @@ function FlowProjectCard({ project }: { project: Project }): JSX.Element {
 
 function FlowPlaceholderCard({ item }: { item: PlaceholderCard }): JSX.Element {
   return (
-    <article className="projects-flow-card-placeholder relative w-[320px] shrink-0 rounded-xl border border-dashed border-[var(--line-soft)] bg-[rgba(38,38,38,0.32)] p-4">
+    <article className="projects-flow-card-placeholder relative w-full max-w-[320px] shrink-0 rounded-xl border border-dashed border-[var(--line-soft)] bg-[rgba(38,38,38,0.32)] p-4 md:w-[320px] md:max-w-none">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-xs text-[var(--text-tertiary)]">placeholder</p>
@@ -288,7 +298,7 @@ export function ProjectsFlow({ projects, fullBleed = false }: ProjectsFlowProps)
 
   return (
     <>
-      <div className="mt-6 grid gap-4 md:hidden">
+      <div className="mt-6 grid justify-items-center gap-4 md:hidden">
         {projects.map((project) => (
           <FlowProjectCard key={project.slug} project={project} />
         ))}

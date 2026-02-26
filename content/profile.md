@@ -16,8 +16,13 @@ skills:
   - AWS
   - Terraform
   - Linux
+  - WindowsServer
   - NewRelic
   - Zabbix
+  - Python
+  - bash
+  - Powershell
+  - Proxmox
 links:
   - label: "GitHub"
     url: "https://github.com/"
