@@ -27,43 +27,53 @@ export default async function LearningPage(): Promise<JSX.Element> {
       </Reveal>
 
       <StaggerGroup className="grid gap-6">
-        {learnings.map((learning) => (
-          <article id={learning.slug} key={learning.slug} className="site-surface-soft scroll-mt-28 grid gap-6 rounded-3xl p-6 lg:grid-cols-2">
-            <div className="space-y-4">
-              <div>
-                <h2 className="text-2xl font-semibold text-[var(--text-0)]">{learning.title}</h2>
-                {learning.focus ? <p className="mt-2 text-sm text-[var(--accent-cyan)]">Focus: {learning.focus}</p> : null}
+        {learnings.map((learning) => {
+          const outcomeItems = toList(learning.outcome);
+
+          return (
+            <article
+              id={learning.slug}
+              key={learning.slug}
+              className="site-surface-soft scroll-mt-28 grid gap-6 rounded-3xl p-6 lg:grid-cols-2"
+            >
+              <div className="space-y-4">
+                <div>
+                  <h2 className="text-2xl font-semibold text-[var(--text-0)]">{learning.title}</h2>
+                  {learning.focus ? <p className="mt-2 text-sm text-[var(--accent-cyan)]">Focus: {learning.focus}</p> : null}
+                </div>
+
+                <p className="whitespace-pre-line text-sm leading-7 text-[var(--text-1)]">{learning.summary}</p>
+
+                {outcomeItems.length > 0 ? (
+                  <div>
+                    <p className="text-sm font-semibold text-[var(--text-0)]">Point</p>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-[var(--text-1)]">
+                      {outcomeItems.map((item) => (
+                        <li key={`${learning.slug}-${item}`}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+
+                {learning.github ? (
+                  <a
+                    href={learning.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="site-button-primary inline-flex rounded-lg px-4 py-2 text-sm font-semibold"
+                  >
+                    GitHub Repository
+                  </a>
+                ) : null}
               </div>
 
-              <p className="whitespace-pre-line text-sm leading-7 text-[var(--text-1)]">{learning.summary}</p>
-
-              <div>
-                <p className="text-sm font-semibold text-[var(--text-0)]">得た知見</p>
-                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-[var(--text-1)]">
-                  {toList(learning.outcome).map((item) => (
-                    <li key={`${learning.slug}-${item}`}>{item}</li>
-                  ))}
-                </ul>
+              <div className="space-y-4">
+                <LearningDiagramViewer title={learning.title} src={learning.diagram} />
+                <TechTable items={learning.techTable} />
               </div>
-
-              {learning.github ? (
-                <a
-                  href={learning.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="site-button-primary inline-flex rounded-lg px-4 py-2 text-sm font-semibold"
-                >
-                  GitHub Repository
-                </a>
-              ) : null}
-            </div>
-
-            <div className="space-y-4">
-              <LearningDiagramViewer title={learning.title} src={learning.diagram} />
-              <TechTable items={learning.techTable} />
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </StaggerGroup>
     </div>
   );

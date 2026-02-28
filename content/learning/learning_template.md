@@ -19,9 +19,3 @@ github: "https://github.com/your/repo"
 diagram: ""
 order: 100
 ---
-
-## 学習目的
-- 学習の背景や課題感を記載。
-
-## 学んだこと
-- 詳細な学びを箇条書きでまとめます。

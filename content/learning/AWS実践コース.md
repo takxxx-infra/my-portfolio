@@ -58,29 +58,5 @@ outcome: |
   ・GitHub Actions と ecspresso を組み合わせ、ECR への push から DB マイグレーション/デプロイまでを自動化
   ・NAT Gateway を EC2 NAT インスタンスへ置き換え、学習環境の通信コストを最小化
 diagram: "/images/diagrams/cp-jissenn/cp-jissenn.png"
-order: 300
+order: 10
 ---
-
-## 学習目的
-- 実務で使える Web 基盤の標準構成を Terraform で再現し、設計判断の根拠を説明できるようにする。
-- セキュリティ/運用/コストのバランスを取りながら、継続的デリバリーまで含めて整備する。
-- アプリ、データ、運用、配信のレイヤを分離し、可用性と保守性の観点で設計する。
-
-## 構成の全体像
-- Route53 でドメイン管理し、CloudFront を入口に WAF を適用。HTTPS は ACM で管理。
-- Web フロントは Amplify でホスティングし、静的コンテンツは S3 から配信。CloudFront でフロント/バックの入口を統一。
-- VPC は 2AZ 構成。public subnet に ALB と NAT インスタンス、private subnet に ECS(Fargate) と RDS を配置。
-- ECS は API/バッチを分離し、ALB からのリクエストは API タスクへ、バッチは EventBridge Scheduler で起動。
-- RDS(PostgreSQL) は Single AZ とし、バックアップやパラメータは最小構成で検証。
-- 運用は SSM Session Manager を採用し、踏み台を使わないアクセスを標準化。
-
-## 設計と運用の工夫
-- AWS Managed Rules と Bot Control を組み合わせ、L7 攻撃対策をテンプレ化して再利用可能にした。
-- Secrets Manager と Parameter Store を用途で使い分け、アプリ設定と秘密情報のライフサイクルを整理。
-- NAT Gateway を EC2 NAT インスタンスへ置き換え、学習環境のコストを抑えつつ運用手順を明文化。
-- GitHub Actions で ECR への push、ecspresso で ECS デプロイ、DB マイグレーションまでを一連で自動化。
-
-## 学んだこと
-- 入口(CloudFront/WAF/ALB)と内部(ECS/RDS)を分離することで、公開範囲と運用責任が明確になる。
-- private subnet 前提で ECS/Fargate を構成すると、セキュリティ上の設計判断がシンプルになる。
-- CI/CD を先に整えることで、インフラ変更を安全に繰り返せる。

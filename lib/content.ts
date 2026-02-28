@@ -214,7 +214,7 @@ export async function getAllLearnings(): Promise<Learning[]> {
         tech: parseStringArray(data.tech, `learning.tech (${slug})`),
         techTable: parseTechTable(data.techTable),
         focus: optionalString(data.focus),
-        outcome: optionalString(data.outcome) ?? "・継続学習中",
+        outcome: optionalString(data.outcome) ?? "",
         github: optionalString(data.github),
         diagram: optionalString(data.diagram),
         order: requiredNumber(data.order, `learning.order (${slug})`),

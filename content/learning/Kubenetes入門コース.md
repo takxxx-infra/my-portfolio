@@ -15,7 +15,7 @@ techTable:
     values:
       - "Kubernetes"
       - "Minikube"
-  - label: "リソース"
+  - label: "Kubernetesリソース"
     values:
       - Node
       - Pod
@@ -37,5 +37,5 @@ techTable:
 outcome: |
   
 diagram: "/images/diagrams/cp-k8s-nyuumon/k8s_nyuumon_cource.png"
-order: 290
+order: 20
 ---
