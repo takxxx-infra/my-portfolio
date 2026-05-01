@@ -7,6 +7,7 @@ frontend:
     build:
       commands:
         - npm run build
+        - aws s3 sync content/projects "s3://${SOURCE_BUCKET}/projects/" --delete --exclude "*" --include "*.md" --exclude "*template.md"
   artifacts:
     baseDirectory: .next
     files:
