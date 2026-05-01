@@ -6,7 +6,7 @@ frontend:
         - npm ci
     build:
       commands:
-        - npm run buil
+        - npm run build
         - echo "start s3 sync from content/projects to s3://${SOURCE_BUCKET}/projects/"
         - aws s3 sync content/projects "s3://${SOURCE_BUCKET}/projects/" --delete --exclude "*" --include "*.md" --exclude "*template.md"
   artifacts:
