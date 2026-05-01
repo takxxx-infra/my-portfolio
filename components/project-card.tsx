@@ -1,5 +1,6 @@
 import type { Project } from "@/types/content";
 
+import { ProjectSummaryAudio } from "@/components/project-summary-audio";
 import { TechTable } from "@/components/tech-table";
 
 type ProjectCardProps = {
@@ -40,6 +41,8 @@ export function ProjectCard({ project, detailed = false }: ProjectCardProps): JS
       </div>
 
       <div className="space-y-4">
+        {detailed ? <ProjectSummaryAudio projectSlug={project.slug} projectTitle={project.title} /> : null}
+
         <p className="text-sm font-semibold text-[var(--text-0)]">技術スタック</p>
         <TechTable items={project.techTable} />
       </div>
